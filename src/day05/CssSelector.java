@@ -2,6 +2,7 @@ package day05;
 
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -38,11 +39,29 @@ public class CssSelector {
         //span.nav-line-2 => span[class=nav-line-2]
         //always put value of the attributes in single quotes('') not double, otherwise css selector might not pick it up
         System.out.println(driver.findElement(By.cssSelector("div[class='row']")).getText());
+        System.out.println("-------------------------");
 
         //chaining the attributes. Locating using multiple attributes
         //<HTML tag><[attribute1=Value of attribute1]><[attribute2=Value of attribute2]>
+       // driver.findElement(By.cssSelector("a[class='nav-a  '][data-csa-c-content-id='nav_cs_amazonbasics']")).click();  //it's for amazon website
 
+        //use * instead of <tag> if tag is not important and we want to find any element
+        //Example: "*[title='title']"  instead of   "div[title='title']"
 
+        //locating with a sub-string starts-with keyword
+        // ^ - starts with
+        //tag[attr^=value]
+        //Example:     div[class^='Text']
+
+        //locating with a sub-string ends-with keyword
+        // $ - ends with
+        //div[class$='Footer']
+        List<WebElement> list2 = driver.findElements(By.cssSelector("a[href$='.com/']"));
+        list2.forEach(el -> System.out.println(el.getText()));
+
+        //contains a text
+        // * - contains
+        //tag[attr*=value]
 
         try {
             Thread.sleep(1000);
