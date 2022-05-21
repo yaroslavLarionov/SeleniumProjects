@@ -1,0 +1,48 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+import java.util.concurrent.TimeUnit;
+
+public class HomeworkRolesTest {
+    WebDriver driver;
+
+    @BeforeMethod
+    public void setUp(){
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\yaril\\Selenium\\DRIVERS\\chromedriver_win32\\chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+    }
+
+    @Test(testName = "Verifying roles", description = "Verify data is displayed in below table with correct role using DataProvider", dataProvider = "Role info", dataProviderClass = DataProviders.class)
+    public void verifyRoles(String firstName, String lastName, String phone, String email, String role) {
+        driver.get("http://automation.techleadacademy.io/#/usermgt");
+        //type first name
+        driver.findElement(By.id("Firstname")).sendKeys(firstName);
+        //type last name
+        driver.findElement(By.id("Lastname")).sendKeys(lastName);
+        //type phone #
+        driver.findElement(By.id("Phonenumber")).sendKeys(phone);
+        //type email
+        driver.findElement(By.id("Email")).sendKeys(email);
+        //select role
+        Select select = new Select(driver.findElement(By.id("Select-role")));
+        select.selectByVisibleText(role);
+        //click submit
+        driver.findElement(By.id("submit-btn")).click();
+        //verify roles match in the output
+        Assert.assertEquals(driver.findElement(By.xpath("//tr[last()]/td[5]")).getText(), role);
+
+    }
+    @AfterMethod
+    public void tearDown() {
+        driver.close();
+    }
+}

@@ -22,6 +22,7 @@ public class OrbitzHomework {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\yaril\\Selenium\\DRIVERS\\chromedriver_win32\\chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, 20);
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
 
         //TODO open the link
         driver.get("https://www.orbitz.com/");
@@ -30,7 +31,6 @@ public class OrbitzHomework {
         WebElement goingTo = driver.findElement(By.xpath("//button[@aria-label='Going to']"));
         goingTo.sendKeys("Las Vegas, Nevada");
         driver.findElement(By.xpath("//div[@class='uitk-typeahead-button-label truncate']/span")).click();
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
 
         //TODO Check-in - Selects today's date and Check-out - 2 weeks later
         driver.findElement(By.id("d1-btn")).click();

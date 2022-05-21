@@ -1,4 +1,5 @@
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.*;
@@ -47,5 +48,11 @@ public class BasicMathTest {
         int actualData = math.multiply(testData1, testData2);
 
         Assert.assertEquals(actualData, expectedData);
+    }
+    @Test
+    @Parameters({"username", "password"})
+    public void test2(String username, String password) {
+        System.out.println(username);
+        System.out.println(password);
     }
 }

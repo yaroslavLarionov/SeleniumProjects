@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.Set;
+
 public class SeleniumUtils {
     /**
      * This method will move your view to the given element
@@ -41,5 +43,14 @@ public class SeleniumUtils {
         WebDriverWait wait = new WebDriverWait(driver, 20);
         wait.until(ExpectedConditions.visibilityOf(element));
 
+    }
+    public static void switchWindow(WebDriver driver){
+        String mainWindow = driver.getWindowHandle();
+        Set<String> allWindows = driver.getWindowHandles();
+
+        for(String each: allWindows){
+            if (!each.equals(mainWindow))
+                driver.switchTo().window(each);
+        }
     }
 }

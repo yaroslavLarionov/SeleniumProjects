@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+     <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Suite">
+    <test name="smoke">
+        <!-- or if we want to run packages we can put <packages></packages>-->
+        <classes>
+            <class name="HomeworkRolesTest"/>
+            <class name="BasicMathTest">
+                <methods>
+                    <include name="testDivide"/>
+                    <include name="testAdd"/>
+                    <!-- or we can put exclude name="testMultiply"></exclude> -->
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+
+<!--  ************************************************************************************************************************* -->
+<!--  we can use groups attribute in TestNG to group the methods we want to include in our smoke or regression tests
+@Test(groups={"smokeTest"}) for 1st method and groups = "smokeTest" for all the others
+We can also include grouping with multiple groups @Test(groups={"smokeTest", "regressionTest"})
+<suite name="Suite">
+    <test name="smoke">
+        <groups>
+            <run>
+                <include name="miniRegression"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="BasicMathTest"/>
+            <class name="SeleniumTest"/>
+            <class name="StringManipulationMethodsTest"/>
+        </classes>
+    </test>
+</suite> -->
+<!--  ************************************************************************************************************************* -->
+        <!--
+<suite name="Suite">
+    <test name="smoke">
+        <classes>
+            <class name="BasicMathTest">
+                <methods>
+                    <include name="testAdd"/>
+                    <include name="testDivide"/>
+                </methods>
+            </class>
+            <class name="SeleniumTest">
+                <methods>
+                    <include name="testAmazon"/>
+                </methods>
+            </class>
+            <class name="StringManipulationMethodsTest">
+                <methods>
+                    <include name="testReturnInitials"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
+-->
+<!--  ************************************************************************************************************************* -->
+<!-- running with parameters (useful for multiple test cases where we use this data, so centralized arguments will help)
+<suite name="Suite">
+<test name="smoke">
+        <parameter name="username" value="standard_user"></parameter>
+        <parameter password="password" value="secret_sauce"></parameter>
+       <classes>
+        <class name="SauceDemoTest"/>
+        <class name="BasicMathTest">
+                <methods>
+                    <include name="test2"/>
+                </methods>
+            </class>
+       </classes>
+</test>
+</suite> -->
